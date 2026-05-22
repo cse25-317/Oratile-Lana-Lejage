@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Explore Cuisines - Lana's Recipe Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="topbar">
+            <a href="index.html" class="logo">
+                <div class="logo__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div class="logo__wordmark">
+                    <span class="logo__name">Lana's</span>
+                    <span class="logo__tagline">Recipe Hub</span>
+                </div>
+            </a>
+
+            <form class="search-form" action="#" method="GET">
+                <input type="text" placeholder="Search cuisines..." aria-label="Search cuisines">
+                <button type="submit" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </form>
+
+            <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Primary Navigation -->
+        <nav class="primary-nav">
+            <div class="container">
+                <ul class="nav-list" id="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipe-detail.html">Recipes</a></li>
+                    <li><a href="cuisines.html" aria-current="page">Cuisines</a></li>
+                    <li><a href="tips.html">Tips</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Page Banner -->
+        <div class="page-banner">
+            <div class="page-banner__img">
+                <img src="images/img1.jpg" alt="Global Cuisines" width="1200" height="230">
+            </div>
+            <div class="page-banner__content">
+                <p class="page-banner__eyebrow">Discover Flavors</p>
+                <h1 class="page-banner__title">Explore Cuisines</h1>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <!-- Cuisines Grid -->
+            <div class="cuisine-grid">
+                <!-- Italian -->
+                <div class="card cuisine-card">
+                    <div class="card__img">
+                        <img src="images/img2.png" alt="Italian Cuisine" width="400" height="225">
+                    </div>
+                    <div class="card__body">
+                        <h3 class="card__title">Italian</h3>
+                        <p class="card__meta">42 recipes</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipes</a>
+                    </div>
+                </div>
+
+                <!-- Indian -->
+                <div class="card cuisine-card">
+                    <div class="card__img">
+                        <img src="images/img2.png" alt="Indian Cuisine" width="400" height="225">
+                    </div>
+                    <div class="card__body">
+                        <h3 class="card__title">Indian</h3>
+                        <p class="card__meta">38 recipes</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipes</a>
+                    </div>
+                </div>
+
+                <!-- Mexican -->
+                <div class="card cuisine-card">
+                    <div class="card__img">
+                        <img src="images/img3.jpg" alt="Mexican Cuisine" width="400" height="225">
+                    </div>
+                    <div class="card__body">
+                        <h3 class="card__title">Mexican</h3>
+                        <p class="card__meta">29 recipes</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipes</a>
+                    </div>
+                </div>
+
+                <!-- Thai -->
+                <div class="card cuisine-card">
+                    <div class="card__img">
+                        <img src="images/img4.jpg" alt="Thai Cuisine" width="400" height="225">
+                    </div>
+                    <div class="card__body">
+                        <h3 class="card__title">Thai</h3>
+                        <p class="card__meta">25 recipes</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipes</a>
+                    </div>
+                </div>
+
+                <!-- Japanese -->
+                <div class="card cuisine-card">
+                    <div class="card__img">
+                        <img src="images/img5.jpg" alt="Japanese Cuisine" width="400" height="225">
+                    </div>
+                    <div class="card__body">
+                        <h3 class="card__title">Japanese</h3>
+                        <p class="card__meta">31 recipes</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipes</a>
+                    </div>
+                </div>
+
+                <!-- French -->
+                <div class="card cuisine-card">
+                    <div class="card__img">
+                        <img src="images/img6.jpg" alt="French Cuisine" width="400" height="225">
+                    </div>
+                    <div class="card__body">
+                        <h3 class="card__title">French</h3>
+                        <p class="card__meta">27 recipes</p>
+                    </div>
+                    <div class="card__footer">
+                        <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+     <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo" style="margin-bottom: var(--sp-4); display:inline-flex;">
+            <div class="logo__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="logo__wordmark">
+              <span class="logo__name">Lana's</span>
+              <span class="logo__tagline">Recipe Hub</span>
+            </div>
+          </a>
+          <p class="footer-brand__desc">A passionate community of home cooks sharing time-tested recipes and kitchen wisdom from around the world — since 2020.</p>
+        </div>
+
+        <!-- Explore -->
+        <div>
+          <h3 class="footer-col__heading">Explore</h3>
+          <ul class="footer-col__links">
+            <li><a href="recipe-detail.html">All Recipes</a></li>
+            <li><a href="cuisines.html">Cuisines</a></li>
+            <li><a href="tips.html">Kitchen Tips</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h3 class="footer-col__heading">Company</h3>
+          <ul class="footer-col__links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Press Kit</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Follow -->
+        <div>
+          <h3 class="footer-col__heading">Follow Us</h3>
+          <ul class="footer-col__links">
+            <li><a href="#">TikTok @lanas.hub</a></li>
+            <li><a href="#">Instagram @lanasrecipehub</a></li>
+            <li><a href="#">Facebook — Lana's Recipe Hub</a></li>
+            <li><a href="#">Pinterest</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-bottom__copy">&copy; 2026 Lana's Recipe Hub. All rights reserved.</p>
+        <div class="footer-bottom__links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" role="status" aria-live="polite">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span class="toast__msg"></span>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    // Newsletter button
+    document.getElementById('newsletter-btn').addEventListener('click', function() {
+      const input = this.previousElementSibling;
+      if (input.value.trim()) {
+        window.showToast('You\'re subscribed! Look for your first recipe Sunday. 🍽️');
+        input.value = '';
+      } else {
+        input.focus();
+      }
+    });
+  </script>
+</body>
+</html>
