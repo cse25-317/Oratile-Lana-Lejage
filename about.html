@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Lana's Recipe Hub</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Skip to main content -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Header -->
+    <header class="site-header">
+        <div class="topbar">
+            <a href="index.html" class="logo">
+                <div class="logo__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div class="logo__wordmark">
+                    <span class="logo__name">Lana's</span>
+                    <span class="logo__tagline">Recipe Hub</span>
+                </div>
+            </a>
+
+            <form class="search-form" action="#" method="GET">
+                <input type="text" placeholder="Search about..." aria-label="Search">
+                <button type="submit" aria-label="Search">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </form>
+
+            <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+
+        <!-- Primary Navigation -->
+        <nav class="primary-nav">
+            <div class="container">
+                <ul class="nav-list" id="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipe-detail.html">Recipes</a></li>
+                    <li><a href="cuisines.html">Cuisines</a></li>
+                    <li><a href="tips.html">Tips</a></li>
+                    <li><a href="about.html" aria-current="page">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Page Banner -->
+        <div class="page-banner">
+            <div class="page-banner__img">
+                <img src="images/img1.jpg" alt="About Lana's Recipe Hub" width="1200" height="230">
+            </div>
+            <div class="page-banner__content">
+                <p class="page-banner__eyebrow">Our Story</p>
+                <h1 class="page-banner__title">About Us</h1>
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Story Section -->
+            <div class="story-grid">
+                <div class="story-grid__img">
+                    <img src="images/img8.jpg" alt="Lana in her kitchen" width="200" height="200">
+                </div>
+                <div class="story-grid__text">
+                    <h2 style="margin-bottom: 1rem; font-size: 1.6rem;">Lana's Recipe Hub started as a passion project...</h2>
+                    <p>What began as a small collection of family recipes shared with friends has grown into a vibrant community of home cooks from around the world. Our mission is to preserve traditional recipes while encouraging creativity and modern twists in the kitchen.</p>
+                    <p>We believe cooking is more than just preparing meals — it's about connection, culture, and joy.</p>
+                    
+                </div>
+            </div>
+
+            <!-- Mission & Vision -->
+            <div class="mv-grid">
+                <!-- Our Mission -->
+                <div class="mv-card">
+                    <div class="mv-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                        </svg>
+                    </div>
+                    <h3>Our Mission</h3>
+                    <p>To make cooking accessible, enjoyable, and meaningful for everyone by sharing time-tested recipes and kitchen wisdom from around the globe.</p>
+                </div>
+
+                <!-- Our Vision -->
+                <div class="mv-card">
+                    <div class="mv-card__icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            <path d="M2.458 12C3.732 7.943 7.523 5 12 5 16.477 5 20.268 7.943 21.542 12 20.268 16.057 16.477 19 12 19 7.523 19 3.732 16.057 2.458 12z"/>
+                        </svg>
+                    </div>
+                    <h3>Our Vision</h3>
+                    <p>A world where every home cook feels confident and inspired in the kitchen, connected through the universal language of food.</p>
+                </div>
+            </div>
+
+            <!-- Meet the Team -->
+            <div class="section__hd">
+                <h2 class="section__title" style="text-align: center;">Meet the Team</h2>
+            </div>
+
+            <div class="team-grid">
+                <!-- Team Member 1 -->
+                <div class="team-card">
+                    <div class="team-card__avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="8" r="5"/>
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        </svg>
+                    </div>
+                    <h3 class="team-card__name">Lana Moreau</h3>
+                    <p class="team-card__role">Founder &amp; Head Chef</p>
+                    <p class="team-card__bio">Passionate home cook with over 20 years of experience preserving family recipes from France and beyond.</p>
+                    
+                </div>
+
+                <!-- Team Member 2 -->
+                <div class="team-card">
+                    <div class="team-card__avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="8" r="5"/>
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        </svg>
+                    </div>
+                    <h3 class="team-card__name">Marcus Chen</h3>
+                    <p class="team-card__role">Recipe Developer</p>
+                    <p class="team-card__bio">Food photographer and developer specializing in Asian fusion and modern comfort food.</p>
+                    
+                </div>
+
+                <!-- Team Member 3 -->
+                <div class="team-card">
+                    <div class="team-card__avatar">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                            <circle cx="12" cy="8" r="5"/>
+                            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+                        </svg>
+                    </div>
+                    <h3 class="team-card__name">Aisha Patel</h3>
+                    <p class="team-card__role">Community Manager</p>
+                    <p class="team-card__bio">Bringing together home cooks from different cultures and managing our growing community.</p>
+                    
+                </div>
+            </div>
+
+            <!-- Community CTA -->
+            <div class="community-cta">
+                <h2>JOIN OUR COMMUNITY</h2>
+                <p>Become part of our food journey</p>
+                <div class="community-cta__btns">
+                    <a href="#" class="btn btn-primary">Sign Up</a>
+                    <a href="contact.html" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+     <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo" style="margin-bottom: var(--sp-4); display:inline-flex;">
+            <div class="logo__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="logo__wordmark">
+              <span class="logo__name">Lana's</span>
+              <span class="logo__tagline">Recipe Hub</span>
+            </div>
+          </a>
+          <p class="footer-brand__desc">A passionate community of home cooks sharing time-tested recipes and kitchen wisdom from around the world — since 2020.</p>
+        </div>
+
+        <!-- Explore -->
+        <div>
+          <h3 class="footer-col__heading">Explore</h3>
+          <ul class="footer-col__links">
+            <li><a href="recipe-detail.html">All Recipes</a></li>
+            <li><a href="cuisines.html">Cuisines</a></li>
+            <li><a href="tips.html">Kitchen Tips</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h3 class="footer-col__heading">Company</h3>
+          <ul class="footer-col__links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Press Kit</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Follow -->
+        <div>
+          <h3 class="footer-col__heading">Follow Us</h3>
+          <ul class="footer-col__links">
+            <li><a href="#">TikTok @lanas.hub</a></li>
+            <li><a href="#">Instagram @lanasrecipehub</a></li>
+            <li><a href="#">Facebook — Lana's Recipe Hub</a></li>
+            <li><a href="#">Pinterest</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-bottom__copy">&copy; 2026 Lana's Recipe Hub. All rights reserved.</p>
+        <div class="footer-bottom__links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" role="status" aria-live="polite">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span class="toast__msg"></span>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    // Newsletter button
+    document.getElementById('newsletter-btn').addEventListener('click', function() {
+      const input = this.previousElementSibling;
+      if (input.value.trim()) {
+        window.showToast('You\'re subscribed! Look for your first recipe Sunday. 🍽️');
+        input.value = '';
+      } else {
+        input.focus();
+      }
+    });
+  </script>
+</body>
+</html>
