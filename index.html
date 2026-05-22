@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lana's Recipe Hub — Home Cooked, World Inspired</title>
+  <meta name="description" content="Discover thousands of recipes from cuisines around the world. Cooking tips, reviews, and a vibrant community — all at Lana's Recipe Hub.">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* ── SCROLL REVEAL ─────────────────────────────────── */
+    .reveal-ready {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.55s cubic-bezier(.4,0,.2,1), transform 0.55s cubic-bezier(.4,0,.2,1);
+    }
+    .reveal-ready.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── BANNER ENHANCEMENTS ─────────────────────────────── */
+    .banner__img-wrap {
+      aspect-ratio: 21/9;
+    }
+    .banner__img-wrap img {
+      object-position: center 40%;
+    }
+
+    /* ── FEATURED MOSAIC ───────────────────────────────── */
+    .mosaic {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr 1fr;
+      grid-template-rows: 280px 200px;
+      gap: 12px;
+      margin-bottom: var(--sp-16);
+    }
+    .mosaic__item {
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      background: var(--surface-alt);
+    }
+    .mosaic__item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.55s cubic-bezier(.4,0,.2,1);
+    }
+    .mosaic__item:hover img { transform: scale(1.07); }
+    .mosaic__item--tall {
+      grid-row: 1 / 3;
+    }
+    .mosaic__item--wide {
+      grid-column: 2 / 4;
+    }
+    .mosaic__overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(17,9,3,.72) 0%, transparent 55%);
+      display: flex; flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--sp-5);
+    }
+    .mosaic__tag {
+      font-size: .64rem; font-weight: 700;
+      letter-spacing: .15em; text-transform: uppercase;
+      color: var(--primary-lt); margin-bottom: var(--sp-1);
+    }
+    .mosaic__title {
+      font-family: var(--ff-display);
+      font-size: clamp(.9rem, 1.6vw, 1.2rem);
+      font-weight: 700; color: #fff;
+      line-height: 1.2;
+    }
+    .mosaic__meta {
+      font-size: .7rem; color: rgba(255,255,255,.65);
+      margin-top: var(--sp-2);
+    }
+
+    /* ── CATEGORY PILLS ────────────────────────────────── */
+    .category-pills {
+      display: flex; flex-wrap: wrap; gap: var(--sp-3);
+      margin-bottom: var(--sp-10);
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: var(--sp-2);
+      padding: .55em 1.2em;
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      font-size: .78rem; font-weight: 500;
+      color: var(--text-body);
+      background: var(--surface);
+      cursor: pointer;
+      transition: border-color var(--t-fast), color var(--t-fast),
+                  background var(--t-fast), transform var(--t-fast);
+      text-decoration: none;
+    }
+    .pill:hover, .pill.active {
+      border-color: var(--primary);
+      color: var(--primary);
+      background: rgba(181,113,42,.06);
+      transform: translateY(-2px);
+    }
+    .pill__dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: var(--primary); flex-shrink: 0;
+    }
+
+    /* ── FILTER BAR ────────────────────────────────────── */
+    .filter-bar {
+      display: flex; align-items: center; gap: var(--sp-3);
+      margin-bottom: var(--sp-8); flex-wrap: wrap;
+    }
+    .filter-bar__label {
+      font-size: .72rem; font-weight: 700;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--text-muted); flex-shrink: 0;
+    }
+    .filter-bar .pill { padding: .38em 1em; font-size: .74rem; }
+    .filter-bar .pill.active {
+      background: var(--primary); color: #fff;
+      border-color: var(--primary);
+    }
+
+    /* ── NEWSLETTER STRIP ──────────────────────────────── */
+    .newsletter-strip {
+      background: var(--surface-alt);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      padding: var(--sp-10) var(--sp-8);
+      display: flex; align-items: center;
+      gap: var(--sp-8); flex-wrap: wrap;
+      margin-block: var(--sp-16);
+    }
+    .newsletter-strip__text { flex: 1; min-width: 220px; }
+    .newsletter-strip__eyebrow {
+      font-size: .68rem; font-weight: 700;
+      letter-spacing: .18em; text-transform: uppercase;
+      color: var(--primary); margin-bottom: var(--sp-2);
+    }
+    .newsletter-strip__title {
+      font-family: var(--ff-display);
+      font-size: clamp(1.2rem, 2.5vw, 1.7rem);
+      font-weight: 700; color: var(--text-h);
+      margin-bottom: var(--sp-2);
+    }
+    .newsletter-strip__desc {
+      font-size: .84rem; color: var(--text-muted); line-height: 1.65;
+    }
+    .newsletter-form {
+      display: flex; gap: var(--sp-3); flex-wrap: wrap;
+      flex: 1; min-width: 260px;
+    }
+    .newsletter-form input {
+      flex: 1; min-width: 180px;
+      padding: .68em 1em;
+      border: 1px solid var(--border);
+      border-radius: var(--r-sm);
+      font-size: .85rem;
+      background: var(--surface);
+      color: var(--text-body);
+      outline: none;
+      transition: border-color var(--t-fast);
+    }
+    .newsletter-form input:focus { border-color: var(--primary); }
+    .newsletter-form input::placeholder { color: var(--text-light); }
+
+    /* ── TRENDING CAROUSEL ─────────────────────────────── */
+    .trending-scroll {
+      display: flex; gap: var(--sp-4);
+      overflow-x: auto; padding-bottom: var(--sp-3);
+      scrollbar-width: thin;
+      scrollbar-color: var(--border) transparent;
+      -webkit-overflow-scrolling: touch;
+    }
+    .trending-scroll::-webkit-scrollbar { height: 4px; }
+    .trending-scroll::-webkit-scrollbar-track { background: transparent; }
+    .trending-scroll::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+
+    .trending-item {
+      flex-shrink: 0; width: 220px;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: var(--surface);
+      transition: border-color var(--t-base), box-shadow var(--t-base), transform var(--t-base);
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .trending-item:hover {
+      border-color: var(--border-dk);
+      box-shadow: var(--sh-md);
+      transform: translateY(-4px);
+    }
+    .trending-item__img {
+      width: 100%; height: 150px; overflow: hidden;
+    }
+    .trending-item__img img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform var(--t-slow);
+    }
+    .trending-item:hover .trending-item__img img { transform: scale(1.08); }
+    .trending-item__body { padding: var(--sp-4); }
+    .trending-item__tag {
+      font-size: .65rem; font-weight: 700;
+      letter-spacing: .12em; text-transform: uppercase;
+      color: var(--primary); margin-bottom: var(--sp-1);
+    }
+    .trending-item__title {
+      font-family: var(--ff-display);
+      font-size: .95rem; font-weight: 600;
+      color: var(--text-h); line-height: 1.3;
+    }
+    .trending-item__meta {
+      font-size: .7rem; color: var(--text-muted);
+      margin-top: var(--sp-2);
+    }
+
+    /* ── TESTIMONIAL BAND ──────────────────────────────── */
+    .testimonial-band {
+      background: var(--nav-bg);
+      padding-block: var(--sp-12);
+      margin-block: var(--sp-16);
+    }
+    .testimonial-band .container {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: var(--sp-8);
+    }
+    .testimonial {
+      text-align: center;
+    }
+    .testimonial__quote {
+      font-family: var(--ff-display);
+      font-size: clamp(.95rem, 1.4vw, 1.1rem);
+      font-style: italic;
+      color: rgba(234,216,190,.85);
+      line-height: 1.7;
+      margin-bottom: var(--sp-5);
+    }
+    .testimonial__quote::before { content: '\201C'; color: var(--primary-lt); margin-right: 2px; }
+    .testimonial__quote::after  { content: '\201D'; color: var(--primary-lt); margin-left: 2px; }
+    .testimonial__author {
+      font-size: .75rem; font-weight: 600;
+      letter-spacing: .1em; text-transform: uppercase;
+      color: var(--primary-lt);
+    }
+    .testimonial__stars {
+      display: flex; justify-content: center; gap: 3px;
+      margin-bottom: var(--sp-4);
+    }
+    .testimonial__stars span { color: var(--primary); font-size: 1rem; }
+
+    /* ── CUISINE PREVIEW STRIP ─────────────────────────── */
+    .cuisine-strip {
+      display: grid; grid-template-columns: repeat(6, 1fr);
+      gap: var(--sp-4); margin-bottom: var(--sp-4);
+    }
+    .cuisine-pill {
+      display: flex; flex-direction: column; align-items: center;
+      gap: var(--sp-3); padding: var(--sp-4);
+      border: 1px solid var(--border);
+      border-radius: var(--r-lg);
+      background: var(--surface);
+      cursor: pointer; text-decoration: none;
+      transition: border-color var(--t-base), transform var(--t-base), box-shadow var(--t-base);
+    }
+    .cuisine-pill:hover {
+      border-color: var(--primary);
+      transform: translateY(-3px);
+      box-shadow: var(--sh-sm);
+    }
+    .cuisine-pill__flag {
+      font-size: 1.8rem; line-height: 1;
+    }
+    .cuisine-pill__name {
+      font-size: .72rem; font-weight: 600;
+      color: var(--text-body); text-align: center;
+      letter-spacing: .03em;
+    }
+    .cuisine-pill__count {
+      font-size: .62rem; color: var(--text-light);
+    }
+
+    /* ── RESPONSIVE EXTRAS ─────────────────────────────── */
+    @media (max-width: 900px) {
+      .mosaic {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 220px 180px 180px;
+      }
+      .mosaic__item--tall {
+        grid-row: 1 / 2;
+        grid-column: 1 / 3;
+      }
+      .mosaic__item--wide {
+        grid-column: 1 / 2;
+      }
+      .testimonial-band .container {
+        grid-template-columns: 1fr;
+        gap: var(--sp-6);
+      }
+      .cuisine-strip {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .newsletter-strip { flex-direction: column; gap: var(--sp-6); }
+    }
+
+    @media (max-width: 620px) {
+      .mosaic {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+      }
+      .mosaic__item { height: 200px; }
+      .mosaic__item--tall, .mosaic__item--wide { grid-column: auto; grid-row: auto; }
+      .category-pills { gap: var(--sp-2); }
+      .cuisine-strip { grid-template-columns: repeat(3, 1fr); }
+      .newsletter-strip { padding: var(--sp-6); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Skip to main content -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ── HEADER ─────────────────────────────────────────────── -->
+  <header class="site-header">
+    <div class="topbar">
+      <a href="index.html" class="logo">
+        <div class="logo__icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+          </svg>
+        </div>
+        <div class="logo__wordmark">
+          <span class="logo__name">Lana's</span>
+          <span class="logo__tagline">Recipe Hub</span>
+        </div>
+      </a>
+
+      <form class="search-form" action="#" method="GET" role="search">
+        <input type="text" placeholder="Search recipes, cuisines, tips…" aria-label="Search">
+        <button type="submit" aria-label="Search">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+        </button>
+      </form>
+
+      <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <!-- Primary Navigation -->
+    <nav class="primary-nav" aria-label="Main navigation">
+      <div class="container">
+        <ul class="nav-list" id="nav-list">
+          <li><a href="index.html" aria-current="page">Home</a></li>
+          <li><a href="recipe-detail.html">Recipes</a></li>
+          <li><a href="cuisines.html">Cuisines</a></li>
+          <li><a href="tips.html">Tips</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <!-- ── MAIN ───────────────────────────────────────────────── -->
+  <main id="main-content">
+
+    <!-- ── BANNER ─────────────────────────────────────────────── -->
+    <section class="banner" aria-label="Welcome to Lana's Recipe Hub">
+      <div class="banner__img-wrap">
+        <img src="images/img1.jpg" alt="A beautifully plated noodle dish with rich sauce and colourful vegetables" loading="eager">
+      </div>
+      <div class="banner__content">
+        <p class="banner__eyebrow anim-fiu d-1">Home Cooked · World Inspired</p>
+        <h1 class="banner__title anim-fiu d-2">
+          Every Dish Tells<br><em>a Story</em>
+        </h1>
+        <p class="banner__desc anim-fiu d-3">
+          Discover thousands of recipes from kitchens around the globe — from cherished family classics to bold modern twists. Your next favourite meal starts here.
+        </p>
+        <div class="banner__actions anim-fiu d-4">
+          <a href="recipe-detail.html" class="btn btn-primary btn-lg">Explore Recipes</a>
+          <a href="cuisines.html" class="btn btn-secondary btn-lg" style="color: rgba(255,255,255,.85); border-color: rgba(255,255,255,.45);">Browse Cuisines</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── STATS STRIP ──────────────────────────────────────── -->
+    <div class="stats-strip" role="region" aria-label="Site statistics">
+      <div class="container">
+        <div class="stat">
+          <div class="stat__number" data-target="1200" data-suffix="+">1200+</div>
+          <div class="stat__label">Recipes</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number" data-target="48" data-suffix="">48</div>
+          <div class="stat__label">Cuisines</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number" data-target="32000" data-suffix="+">32,000+</div>
+          <div class="stat__label">Community Members</div>
+        </div>
+        <div class="stat">
+          <div class="stat__number" data-target="98" data-suffix="%">98%</div>
+          <div class="stat__label">5-Star Reviews</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── FEATURED MOSAIC ───────────────────────────────────── -->
+    <section class="section section--sm" aria-label="Featured dishes">
+      <div class="container">
+        <div class="section__hd" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <span class="section__label">Featured This Week</span>
+            <h2 class="section__title">Dishes Worth <em>Dreaming About</em></h2>
+          </div>
+          <a href="recipe-detail.html" class="btn btn-ghost">View All Recipes →</a>
+        </div>
+
+        <div class="mosaic">
+          <!-- Tall main image -->
+          <a href="recipe-detail.html" class="mosaic__item mosaic__item--tall">
+            <img src="images/img2.png" alt="Rigatoni with burrata and pistachios">
+            <div class="mosaic__overlay">
+              <span class="mosaic__tag">Italian · Pasta</span>
+              <div class="mosaic__title">Rigatoni with Burrata &amp; Crushed Pistachios</div>
+              <div class="mosaic__meta">35 min · Intermediate</div>
+            </div>
+          </a>
+          <!-- Wide top-right -->
+          <a href="recipe-detail.html" class="mosaic__item mosaic__item--wide">
+            <img src="images/img3.jpg" alt="Penne arrabbiata with parmesan">
+            <div class="mosaic__overlay">
+              <span class="mosaic__tag">Italian · Quick</span>
+              <div class="mosaic__title">Classic Penne Arrabbiata with Aged Parmesan</div>
+              <div class="mosaic__meta">25 min · Easy</div>
+            </div>
+          </a>
+          <!-- Bottom-right 1 -->
+          <a href="recipe-detail.html" class="mosaic__item">
+            <img src="images/img4.jpg" alt="Penne with grilled prawns">
+            <div class="mosaic__overlay">
+              <span class="mosaic__tag">Seafood</span>
+              <div class="mosaic__title">Penne with Grilled King Prawns</div>
+              <div class="mosaic__meta">30 min · Intermediate</div>
+            </div>
+          </a>
+          <!-- Bottom-right 2 -->
+          <a href="recipe-detail.html" class="mosaic__item">
+            <img src="images/img5.jpg" alt="Truffle fries with cream sauce">
+            <div class="mosaic__overlay">
+              <span class="mosaic__tag">Comfort Food</span>
+              <div class="mosaic__title">Truffle Fries with Smoked Cream</div>
+              <div class="mosaic__meta">20 min · Easy</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TRENDING RECIPES ─────────────────────────────────── -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__hd" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom: var(--sp-6);">
+          <div>
+            <span class="section__label">Trending Now</span>
+            <h2 class="section__title">Community <em>Favourites</em></h2>
+          </div>
+          <a href="recipe-detail.html" class="btn btn-ghost">See All →</a>
+        </div>
+
+        <div class="trending-scroll">
+          <a href="recipe-detail.html" class="trending-item">
+            <div class="trending-item__img">
+              <img src="images/img6.jpg" alt="Spaghetti with freshly grated parmesan">
+            </div>
+            <div class="trending-item__body">
+              <div class="trending-item__tag">Italian</div>
+              <div class="trending-item__title">Spaghetti Pomodoro with Freshly Grated Parmigiano</div>
+              <div class="trending-item__meta">⏱ 30 min &nbsp;·&nbsp; ★ 4.9</div>
+            </div>
+          </a>
+          <a href="recipe-detail.html" class="trending-item">
+            <div class="trending-item__img">
+              <img src="images/img7.jpg" alt="Seafood spaghetti with lemon">
+            </div>
+            <div class="trending-item__body">
+              <div class="trending-item__tag">Seafood</div>
+              <div class="trending-item__title">Frutti di Mare Spaghetti with Lemon Zest</div>
+              <div class="trending-item__meta">⏱ 40 min &nbsp;·&nbsp; ★ 4.8</div>
+            </div>
+          </a>
+          <a href="recipe-detail.html" class="trending-item">
+            <div class="trending-item__img">
+              <img src="images/img1.jpg" alt="Spicy noodle stir-fry">
+            </div>
+            <div class="trending-item__body">
+              <div class="trending-item__tag">Asian Fusion</div>
+              <div class="trending-item__title">Szechuan Beef Noodle Stir-Fry</div>
+              <div class="trending-item__meta">⏱ 25 min &nbsp;·&nbsp; ★ 4.7</div>
+            </div>
+          </a>
+          <a href="recipe-detail.html" class="trending-item">
+            <div class="trending-item__img">
+              <img src="images/img3.jpg" alt="Pasta with tomato sauce">
+            </div>
+            <div class="trending-item__body">
+              <div class="trending-item__tag">Italian · Easy</div>
+              <div class="trending-item__title">Penne Arrabbiata — Five Ingredients</div>
+              <div class="trending-item__meta">⏱ 20 min &nbsp;·&nbsp; ★ 4.6</div>
+            </div>
+          </a>
+          <a href="recipe-detail.html" class="trending-item">
+            <div class="trending-item__img">
+              <img src="images/img4.jpg" alt="Pasta with shrimp">
+            </div>
+            <div class="trending-item__body">
+              <div class="trending-item__tag">Italian · Seafood</div>
+              <div class="trending-item__title">Creamy Prawn Penne alla Diavola</div>
+              <div class="trending-item__meta">⏱ 35 min &nbsp;·&nbsp; ★ 4.8</div>
+            </div>
+          </a>
+          <a href="recipe-detail.html" class="trending-item">
+            <div class="trending-item__img">
+              <img src="images/img5.jpg" alt="Gourmet loaded fries">
+            </div>
+            <div class="trending-item__body">
+              <div class="trending-item__tag">Comfort Food</div>
+              <div class="trending-item__title">Loaded Truffle Fries with Crumbled Wagyu</div>
+              <div class="trending-item__meta">⏱ 20 min &nbsp;·&nbsp; ★ 4.9</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── RECIPE GRID ───────────────────────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <div class="section__hd">
+          <span class="section__label">Latest Recipes</span>
+          <h2 class="section__title">Fresh From the <em>Kitchen</em></h2>
+        </div>
+
+        <!-- Filter Bar -->
+        <div class="filter-bar" role="group" aria-label="Filter recipes">
+          <span class="filter-bar__label">Filter:</span>
+          <button class="pill active" data-filter="all">All</button>
+          <button class="pill" data-filter="easy">Easy</button>
+          <button class="pill" data-filter="quick">Quick</button>
+          <button class="pill" data-filter="vegetarian">Vegetarian</button>
+          <button class="pill" data-filter="seafood">Seafood</button>
+        </div>
+
+        <div class="recipe-grid">
+          <!-- Card 1 -->
+          <article class="card recipe-card" data-tags="pasta vegetarian">
+            <div class="card__img">
+              <img src="images/img2.png" alt="Rigatoni with burrata and pistachios" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__meta" style="margin-bottom:.5rem;">
+                <span class="badge badge--primary">Italian</span>
+                <span class="badge">Vegetarian</span>
+              </div>
+              <h3 class="card__title">Rigatoni with Burrata &amp; Pistachios</h3>
+              <div class="card__meta">
+                <span class="card__meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  35 min
+                </span>
+                <span class="card__meta-item">
+                  <span class="diff-dot diff-dot--medium"></span>
+                  Intermediate
+                </span>
+                <span class="card__meta-item">★ 4.9</span>
+              </div>
+            </div>
+            <div class="card__footer">
+              <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipe</a>
+              <span style="font-size:.72rem; color:var(--text-light);">128 reviews</span>
+            </div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="card recipe-card" data-tags="seafood quick">
+            <div class="card__img">
+              <img src="images/img4.jpg" alt="Penne with king prawns" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__meta" style="margin-bottom:.5rem;">
+                <span class="badge badge--primary">Seafood</span>
+                <span class="badge">Italian</span>
+              </div>
+              <h3 class="card__title">Penne with Grilled King Prawns</h3>
+              <div class="card__meta">
+                <span class="card__meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  30 min
+                </span>
+                <span class="card__meta-item">
+                  <span class="diff-dot diff-dot--medium"></span>
+                  Intermediate
+                </span>
+                <span class="card__meta-item">★ 4.8</span>
+              </div>
+            </div>
+            <div class="card__footer">
+              <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipe</a>
+              <span style="font-size:.72rem; color:var(--text-light);">96 reviews</span>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="card recipe-card" data-tags="easy quick comfort">
+            <div class="card__img">
+              <img src="images/img3.jpg" alt="Penne arrabbiata" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__meta" style="margin-bottom:.5rem;">
+                <span class="badge badge--primary">Italian</span>
+                <span class="badge">Easy</span>
+              </div>
+              <h3 class="card__title">Classic Penne Arrabbiata</h3>
+              <div class="card__meta">
+                <span class="card__meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  25 min
+                </span>
+                <span class="card__meta-item">
+                  <span class="diff-dot diff-dot--easy"></span>
+                  Easy
+                </span>
+                <span class="card__meta-item">★ 4.7</span>
+              </div>
+            </div>
+            <div class="card__footer">
+              <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipe</a>
+              <span style="font-size:.72rem; color:var(--text-light);">74 reviews</span>
+            </div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="card recipe-card" data-tags="comfort quick">
+            <div class="card__img">
+              <img src="images/img5.jpg" alt="Truffle fries with cream sauce" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__meta" style="margin-bottom:.5rem;">
+                <span class="badge">Comfort Food</span>
+                <span class="badge badge--accent">Quick</span>
+              </div>
+              <h3 class="card__title">Truffle Fries with Smoked Cream Sauce</h3>
+              <div class="card__meta">
+                <span class="card__meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  20 min
+                </span>
+                <span class="card__meta-item">
+                  <span class="diff-dot diff-dot--easy"></span>
+                  Easy
+                </span>
+                <span class="card__meta-item">★ 4.9</span>
+              </div>
+            </div>
+            <div class="card__footer">
+              <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipe</a>
+              <span style="font-size:.72rem; color:var(--text-light);">203 reviews</span>
+            </div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="card recipe-card" data-tags="italian pasta">
+            <div class="card__img">
+              <img src="images/img6.jpg" alt="Spaghetti pomodoro with parmesan" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__meta" style="margin-bottom:.5rem;">
+                <span class="badge badge--primary">Italian</span>
+                <span class="badge">Classic</span>
+              </div>
+              <h3 class="card__title">Spaghetti Pomodoro with Parmigiano</h3>
+              <div class="card__meta">
+                <span class="card__meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  30 min
+                </span>
+                <span class="card__meta-item">
+                  <span class="diff-dot diff-dot--easy"></span>
+                  Easy
+                </span>
+                <span class="card__meta-item">★ 4.9</span>
+              </div>
+            </div>
+            <div class="card__footer">
+              <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipe</a>
+              <span style="font-size:.72rem; color:var(--text-light);">311 reviews</span>
+            </div>
+          </article>
+
+          <!-- Card 6 -->
+          <article class="card recipe-card" data-tags="seafood pasta quick">
+            <div class="card__img">
+              <img src="images/img7.jpg" alt="Seafood spaghetti with lemon" loading="lazy">
+            </div>
+            <div class="card__body">
+              <div class="card__meta" style="margin-bottom:.5rem;">
+                <span class="badge badge--primary">Seafood</span>
+                <span class="badge">Italian</span>
+              </div>
+              <h3 class="card__title">Frutti di Mare Spaghetti with Lemon</h3>
+              <div class="card__meta">
+                <span class="card__meta-item">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                  40 min
+                </span>
+                <span class="card__meta-item">
+                  <span class="diff-dot diff-dot--medium"></span>
+                  Intermediate
+                </span>
+                <span class="card__meta-item">★ 4.8</span>
+              </div>
+            </div>
+            <div class="card__footer">
+              <a href="recipe-detail.html" class="btn btn-primary btn-sm">View Recipe</a>
+              <span style="font-size:.72rem; color:var(--text-light);">159 reviews</span>
+            </div>
+          </article>
+        </div>
+
+        <div style="text-align:center; margin-top: var(--sp-10);">
+          <a href="recipe-detail.html" class="btn btn-secondary btn-lg">Load More Recipes</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── EXPLORE CUISINES STRIP ────────────────────────────── -->
+    <section class="section section--alt">
+      <div class="container">
+        <div class="section__hd section__hd--center">
+          <span class="section__label">Around the World</span>
+          <h2 class="section__title">Explore <em>Cuisines</em></h2>
+          <p class="section__subtitle">From the bustling street markets of Bangkok to the rustic trattorias of Tuscany — every culture has a recipe worth sharing.</p>
+        </div>
+
+        <div class="cuisine-strip">
+          <a href="cuisines.html" class="cuisine-pill">
+            <span class="cuisine-pill__flag">🇮🇹</span>
+            <span class="cuisine-pill__name">Italian</span>
+            <span class="cuisine-pill__count">42 recipes</span>
+          </a>
+          <a href="cuisines.html" class="cuisine-pill">
+            <span class="cuisine-pill__flag">🇮🇳</span>
+            <span class="cuisine-pill__name">Indian</span>
+            <span class="cuisine-pill__count">38 recipes</span>
+          </a>
+          <a href="cuisines.html" class="cuisine-pill">
+            <span class="cuisine-pill__flag">🇲🇽</span>
+            <span class="cuisine-pill__name">Mexican</span>
+            <span class="cuisine-pill__count">29 recipes</span>
+          </a>
+          <a href="cuisines.html" class="cuisine-pill">
+            <span class="cuisine-pill__flag">🇹🇭</span>
+            <span class="cuisine-pill__name">Thai</span>
+            <span class="cuisine-pill__count">25 recipes</span>
+          </a>
+          <a href="cuisines.html" class="cuisine-pill">
+            <span class="cuisine-pill__flag">🇯🇵</span>
+            <span class="cuisine-pill__name">Japanese</span>
+            <span class="cuisine-pill__count">31 recipes</span>
+          </a>
+          <a href="cuisines.html" class="cuisine-pill">
+            <span class="cuisine-pill__flag">🇫🇷</span>
+            <span class="cuisine-pill__name">French</span>
+            <span class="cuisine-pill__count">27 recipes</span>
+          </a>
+        </div>
+
+        <div style="text-align:center; margin-top: var(--sp-6);">
+          <a href="cuisines.html" class="btn btn-secondary">View All Cuisines</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TESTIMONIAL BAND ─────────────────────────────────── -->
+    <div class="testimonial-band" role="region" aria-label="Community testimonials">
+      <div class="container">
+        <div class="testimonial">
+          <div class="testimonial__stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="testimonial__quote">
+            Lana's Hub is the only recipe site I keep coming back to. The instructions are crystal clear and the results are always restaurant-quality.
+          </p>
+          <div class="testimonial__author">— Priya M., Mumbai</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial__stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="testimonial__quote">
+            I made the butter chicken for my family and everyone asked for the recipe. This site is a genuine treasure.
+          </p>
+          <div class="testimonial__author">— James O., London</div>
+        </div>
+        <div class="testimonial">
+          <div class="testimonial__stars">
+            <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
+          </div>
+          <p class="testimonial__quote">
+            The kitchen tips section alone is worth bookmarking. I've learned more here in a month than in years of cooking shows.
+          </p>
+          <div class="testimonial__author">— Amara N., Nairobi</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ── TIPS PREVIEW ─────────────────────────────────────── -->
+    <section class="section">
+      <div class="container">
+        <div class="section__hd" style="display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <span class="section__label">Kitchen Wisdom</span>
+            <h2 class="section__title">Tips &amp; <em>Tricks</em></h2>
+          </div>
+          <a href="tips.html" class="btn btn-ghost">All Tips →</a>
+        </div>
+
+        <div class="tips-grid" style="grid-template-columns: repeat(5,1fr);">
+          <div class="tip-card">
+            <div class="tip-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <h3 class="tip-card__title">Food Safety</h3>
+            <p class="tip-card__text">Proper storage, handling &amp; temperature guidelines.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="5"/><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+              </svg>
+            </div>
+            <h3 class="tip-card__title">Hygiene</h3>
+            <p class="tip-card__text">Best practices for hand washing &amp; safe cooking habits.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M14 3v18M6 3v18"/><rect x="3" y="8" width="18" height="8" rx="2"/>
+              </svg>
+            </div>
+            <h3 class="tip-card__title">Utensil Safety</h3>
+            <p class="tip-card__text">How to choose, maintain &amp; safely use kitchen tools.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2v20M2 12h20"/>
+              </svg>
+            </div>
+            <h3 class="tip-card__title">Preparation</h3>
+            <p class="tip-card__text">Mise en place, knife skills &amp; efficient meal prep.</p>
+          </div>
+          <div class="tip-card">
+            <div class="tip-card__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-10l2 2m-2-2v10a1 1 0 01-1 1h-3"/>
+              </svg>
+            </div>
+            <h3 class="tip-card__title">Cleanliness</h3>
+            <p class="tip-card__text">Deep cleaning schedules &amp; kitchen organisation.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── NEWSLETTER ───────────────────────────────────────── -->
+    <div class="container">
+      <div class="newsletter-strip">
+        <div class="newsletter-strip__text">
+          <p class="newsletter-strip__eyebrow">Stay in the Loop</p>
+          <h2 class="newsletter-strip__title">Get Weekly Recipes in Your Inbox</h2>
+          <p class="newsletter-strip__desc">New recipes, seasonal guides, and exclusive tips — curated by Lana every Sunday.</p>
+        </div>
+        <div class="newsletter-form">
+          <input type="email" placeholder="your@email.com" aria-label="Email address for newsletter">
+          <button class="btn btn-primary" id="newsletter-btn">Subscribe</button>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo" style="margin-bottom: var(--sp-4); display:inline-flex;">
+            <div class="logo__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="logo__wordmark">
+              <span class="logo__name">Lana's</span>
+              <span class="logo__tagline">Recipe Hub</span>
+            </div>
+          </a>
+          <p class="footer-brand__desc">A passionate community of home cooks sharing time-tested recipes and kitchen wisdom from around the world — since 2020.</p>
+        </div>
+
+        <!-- Explore -->
+        <div>
+          <h3 class="footer-col__heading">Explore</h3>
+          <ul class="footer-col__links">
+            <li><a href="recipe-detail.html">All Recipes</a></li>
+            <li><a href="cuisines.html">Cuisines</a></li>
+            <li><a href="tips.html">Kitchen Tips</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h3 class="footer-col__heading">Company</h3>
+          <ul class="footer-col__links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </div>
+
+        <!-- Follow -->
+        <div>
+          <h3 class="footer-col__heading">Follow Us</h3>
+          <ul class="footer-col__links">
+            <li><a href="#">TikTok @lanas.hub</a></li>
+            <li><a href="#">Instagram @lanasrecipehub</a></li>
+            <li><a href="#">Facebook — Lana's Recipe Hub</a></li>
+            <li><a href="#">Pinterest</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-bottom__copy">&copy; 2026 Lana's Recipe Hub. All rights reserved.</p>
+        <div class="footer-bottom__links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" role="status" aria-live="polite">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span class="toast__msg"></span>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    // Newsletter button
+    document.getElementById('newsletter-btn').addEventListener('click', function() {
+      const input = this.previousElementSibling;
+      if (input.value.trim()) {
+        window.showToast('You\'re subscribed! Look for your first recipe Sunday. 🍽️');
+        input.value = '';
+      } else {
+        input.focus();
+      }
+    });
+  </script>
+</body>
+</html>
