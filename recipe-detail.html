@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes - Lana's Recipe Hub</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .recipe-banner {
+            width: 100%;
+            height: 420px;
+            overflow: hidden;
+            position: relative;
+            margin-bottom: 3rem;
+        }
+        .recipe-banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .recipe-banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(26,14,4,0.3), rgba(26,14,4,0.75));
+        }
+        .recipe-banner-content {
+            position: absolute;
+            bottom: 2.5rem;
+            left: 50%;
+            transform: translateX(-50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+        }
+        .cuisine-section {
+            margin-bottom: 4.5rem;
+        }
+        .cuisine-title {
+            font-family: var(--ff-display);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-h);
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 0.5rem;
+        }
+        .recipe-detail {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--r-lg);
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <header class="site-header">
+        <div class="topbar">
+            <a href="index.html" class="logo">
+                <div class="logo__icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+                    </svg>
+                </div>
+                <div class="logo__wordmark">
+                    <span class="logo__name">Lana's</span>
+                    <span class="logo__tagline">Recipe Hub</span>
+                </div>
+            </a>
+
+            <form class="search-form" action="#" method="GET">
+                <input type="text" placeholder="Search recipes..." aria-label="Search">
+                <button type="submit">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                </button>
+            </form>
+
+            <button class="nav-toggle" aria-expanded="false" aria-label="Toggle navigation">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+
+        <nav class="primary-nav">
+            <div class="container">
+                <ul class="nav-list" id="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="recipes.html" aria-current="page">Recipes</a></li>
+                    <li><a href="cuisines.html">Cuisines</a></li>
+                    <li><a href="tips.html">Tips</a></li>
+                    <li><a href="reviews.html">Reviews</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <!-- Banner -->
+        <div class="recipe-banner">
+            <img src="images/img1.jpg" alt="Global Cuisine" width="1400" height="600">
+            <div class="recipe-hero-content">
+                <h1 class="hero__title" style="color:white; margin-bottom:0.5rem;">World Recipes</h1>
+                <p class="hero__desc" style="color:rgba(255,255,255,0.9);">Authentic dishes from around the globe</p>
+            </div>
+        </div>
+
+        <div class="container">
+
+            <!-- Italian -->
+            <div class="cuisine-section">
+                <h2 class="cuisine-title">Italian</h2>
+                <div class="recipe-detail">
+                    <h3>Creamy Tuscan Chicken</h3>
+                    <p><strong>Prep Time:</strong> 10 min | <strong>Cook Time:</strong> 30 min | <strong>Servings:</strong> 4</p>
+                    <h4>Ingredients</h4>
+                    <ul>
+                        <li>4 boneless chicken breasts</li>
+                        <li>1 cup heavy cream</li>
+                        <li>½ cup chicken broth</li>
+                        <li>½ cup sun-dried tomatoes</li>
+                        <li>3 cloves garlic, minced</li>
+                        <li>1 tsp Italian seasoning</li>
+                        <li>2 cups fresh spinach</li>
+                        <li>½ cup grated Parmesan</li>
+                    </ul>
+                    <h4>Instructions</h4>
+                    <ol>
+                        <li>Season chicken with salt and pepper. Sear in a skillet until golden. Remove and set aside.</li>
+                        <li>In the same pan, sauté garlic, then add cream, broth, and sun-dried tomatoes.</li>
+                        <li>Return chicken to pan and simmer for 15 minutes.</li>
+                        <li>Add spinach and Parmesan. Cook until spinach wilts.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Indian -->
+            <div class="cuisine-section">
+                <h2 class="cuisine-title">Indian</h2>
+                <div class="recipe-detail">
+                    <h3>Classic Butter Chicken</h3>
+                    <p><strong>Prep Time:</strong> 20 min | <strong>Cook Time:</strong> 25 min | <strong>Servings:</strong> 4</p>
+                    <h4>Ingredients</h4>
+                    <ul>
+                        <li>1.5 lbs chicken thighs, cubed</li>
+                        <li>1 cup yogurt</li>
+                        <li>3 tbsp butter</li>
+                        <li>1 onion, finely chopped</li>
+                        <li>4 garlic cloves + 1 tbsp ginger</li>
+                        <li>2 tsp garam masala, 1 tsp cumin</li>
+                        <li>1 cup tomato sauce</li>
+                        <li>1 cup heavy cream</li>
+                    </ul>
+                    <h4>Instructions</h4>
+                    <ol>
+                        <li>Marinate chicken in yogurt and spices for 1 hour.</li>
+                        <li>Cook onions, garlic, and ginger in butter until golden.</li>
+                        <li>Add spices and tomato sauce. Simmer, then add chicken and cream.</li>
+                        <li>Cook gently for 15 minutes until chicken is tender.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Mexican -->
+            <div class="cuisine-section">
+                <h2 class="cuisine-title">Mexican</h2>
+                <div class="recipe-detail">
+                    <h3>Chicken Fajitas</h3>
+                    <p><strong>Prep Time:</strong> 15 min | <strong>Cook Time:</strong> 15 min | <strong>Servings:</strong> 4</p>
+                    <h4>Ingredients</h4>
+                    <ul>
+                        <li>1.5 lbs chicken strips</li>
+                        <li>3 bell peppers, sliced</li>
+                        <li>1 large onion, sliced</li>
+                        <li>2 tbsp fajita seasoning</li>
+                        <li>Juice of 2 limes</li>
+                        <li>Tortillas, sour cream, guacamole</li>
+                    </ul>
+                    <h4>Instructions</h4>
+                    <ol>
+                        <li>Marinate chicken with lime juice and seasoning.</li>
+                        <li>Sauté chicken until cooked. Remove.</li>
+                        <li>Cook peppers and onions until charred.</li>
+                        <li>Serve with warm tortillas and toppings.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Thai -->
+            <div class="cuisine-section">
+                <h2 class="cuisine-title">Thai</h2>
+                <div class="recipe-detail">
+                    <h3>Thai Basil Beef (Pad Kra Pao)</h3>
+                    <p><strong>Prep Time:</strong> 10 min | <strong>Cook Time:</strong> 15 min | <strong>Servings:</strong> 3</p>
+                    <h4>Ingredients</h4>
+                    <ul>
+                        <li>1 lb ground beef</li>
+                        <li>4 garlic cloves, minced</li>
+                        <li>2 Thai chilies</li>
+                        <li>1 bunch Thai basil</li>
+                        <li>2 tbsp oyster sauce</li>
+                        <li>1 tbsp soy sauce</li>
+                    </ul>
+                    <h4>Instructions</h4>
+                    <ol>
+                        <li>Stir-fry garlic and chilies in oil.</li>
+                        <li>Add beef and cook until browned.</li>
+                        <li>Season with sauces and finish with fresh basil.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- Japanese -->
+            <div class="cuisine-section">
+                <h2 class="cuisine-title">Japanese</h2>
+                <div class="recipe-detail">
+                    <h3>Teriyaki Salmon Bowl</h3>
+                    <p><strong>Prep Time:</strong> 10 min | <strong>Cook Time:</strong> 15 min | <strong>Servings:</strong> 2</p>
+                    <h4>Ingredients</h4>
+                    <ul>
+                        <li>2 salmon fillets</li>
+                        <li>¼ cup soy sauce</li>
+                        <li>2 tbsp mirin</li>
+                        <li>1 tbsp honey</li>
+                        <li>1 tsp ginger, grated</li>
+                    </ul>
+                    <h4>Instructions</h4>
+                    <ol>
+                        <li>Mix sauce ingredients and marinate salmon for 10 minutes.</li>
+                        <li>Pan-sear salmon skin-side down, then brush with sauce.</li>
+                        <li>Serve over rice with steamed vegetables.</li>
+                    </ol>
+                </div>
+            </div>
+
+            <!-- French -->
+            <div class="cuisine-section">
+                <h2 class="cuisine-title">French</h2>
+                <div class="recipe-detail">
+                    <h3>Classic Coq au Vin</h3>
+                    <p><strong>Prep Time:</strong> 30 min | <strong>Cook Time:</strong> 60 min | <strong>Servings:</strong> 6</p>
+                    <h4>Ingredients</h4>
+                    <ul>
+                        <li>1 whole chicken, cut into pieces</li>
+                        <li>1 bottle red wine</li>
+                        <li>8 oz bacon, diced</li>
+                        <li>12 pearl onions</li>
+                        <li>8 oz mushrooms</li>
+                        <li>2 carrots, chopped</li>
+                    </ul>
+                    <h4>Instructions</h4>
+                    <ol>
+                        <li>Brown chicken and bacon. Remove.</li>
+                        <li>Sauté vegetables, then return chicken and add wine.</li>
+                        <li>Simmer covered for 45–60 minutes until tender.</li>
+                    </ol>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <!-- Brand -->
+        <div class="footer-brand">
+          <a href="index.html" class="logo" style="margin-bottom: var(--sp-4); display:inline-flex;">
+            <div class="logo__icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+              </svg>
+            </div>
+            <div class="logo__wordmark">
+              <span class="logo__name">Lana's</span>
+              <span class="logo__tagline">Recipe Hub</span>
+            </div>
+          </a>
+          <p class="footer-brand__desc">A passionate community of home cooks sharing time-tested recipes and kitchen wisdom from around the world — since 2020.</p>
+        </div>
+
+        <!-- Explore -->
+        <div>
+          <h3 class="footer-col__heading">Explore</h3>
+          <ul class="footer-col__links">
+            <li><a href="recipe-detail.html">All Recipes</a></li>
+            <li><a href="cuisines.html">Cuisines</a></li>
+            <li><a href="tips.html">Kitchen Tips</a></li>
+          </ul>
+        </div>
+
+        <!-- Company -->
+        <div>
+          <h3 class="footer-col__heading">Company</h3>
+          <ul class="footer-col__links">
+            <li><a href="about.html">About Us</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="#">Press Kit</a></li>
+            <li><a href="#">Careers</a></li>
+          </ul>
+        </div>
+
+        <!-- Follow -->
+        <div>
+          <h3 class="footer-col__heading">Follow Us</h3>
+          <ul class="footer-col__links">
+            <li><a href="#">TikTok @lanas.hub</a></li>
+            <li><a href="#">Instagram @lanasrecipehub</a></li>
+            <li><a href="#">Facebook — Lana's Recipe Hub</a></li>
+            <li><a href="#">Pinterest</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-bottom__copy">&copy; 2026 Lana's Recipe Hub. All rights reserved.</p>
+        <div class="footer-bottom__links">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Use</a>
+          <a href="#">Cookie Settings</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" role="status" aria-live="polite">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <polyline points="20 6 9 17 4 12"></polyline>
+    </svg>
+    <span class="toast__msg"></span>
+  </div>
+
+  <script src="main.js"></script>
+  <script>
+    // Newsletter button
+    document.getElementById('newsletter-btn').addEventListener('click', function() {
+      const input = this.previousElementSibling;
+      if (input.value.trim()) {
+        window.showToast('You\'re subscribed! Look for your first recipe Sunday. 🍽️');
+        input.value = '';
+      } else {
+        input.focus();
+      }
+    });
+  </script>
+</body>
+</html>
